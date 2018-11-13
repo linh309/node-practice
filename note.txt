@@ -1,0 +1,3 @@
+ example shows that the program blocks until it reads the file and then only it proceeds to end the program.
+
+The second example shows that the program does not wait for file reading and proceeds to print "Pr
