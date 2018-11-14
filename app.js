@@ -30,6 +30,52 @@ var express = require('express'),
     app = express(),
     port = process.env.port || 3000;
 
+  // var firebase = require('firebase');
+  var admin = require("firebase-admin");
+
+  var serviceAccount = require("./key.json");
+  
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://nodepractice-4071a.firebaseio.com"
+  });
+
+  //get a reference to the database service
+var database = admin.database();
+//var auth = firebase.auth();
+var userId = database.ref("/users/").once('value').then(function(snapshot){
+  var val = snapshot.val();
+  console.log(val);
+});
+
+
+  // Initialize Firebase
+// TODO: Replace with your project's customized code snippet
+// var config = {
+//   apiKey: "AIzaSyBk3Gue8pLQBKBPd02HhWs312eFqR0abrs",
+//   authDomain: "nodepractice-4071a.firebaseapp.com",
+//   databaseURL: "https://nodepractice-4071a.firebaseio.com",
+//   projectId: "nodepractice-4071a",
+//   storageBucket: "nodepractice-4071a.appspot.com",
+//   messagingSenderId: "405555928468"
+// };
+// firebase.initializeApp(config);
+// firebase.database.enableLogging(true);
+
+// //get a reference to the database service
+// var database = firebase.database();
+// //var auth = firebase.auth();
+// var userId = database.ref("/users/8i3oJx5P2Hs9YHhS5H16").once('value').then(function(snapshot){
+//   var val = snapshot.val();
+//   console.log(val);
+// });
+// var users = database.ref("users");
+// users.on("value", snap => {
+//   console.log(snap);
+//   console.log(snap.key); // this key will output users
+//   console.log(snap.val()); // this method will return full user data object
+// });
+
 // app.get('/account',(req,res,next)=>{
 //   res.json({
 //     "AccountName": "Linh",
@@ -50,6 +96,6 @@ var express = require('express'),
 // studentRoute(app);
 
   
-app.listen(port, ()=>{
-  console.log(`Server running on port ${port}`);
-});
+// app.listen(port, ()=>{
+//   console.log(`Server running on port ${port}`);
+// });
