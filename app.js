@@ -25,27 +25,29 @@
 // server.listen(port, hostname, () => {
 //   console.log(`Server running at http://${hostname}:${port}/`);
 // });
-
+var studentRoute = require('./studentRouteHelper');
 var express = require('express'),
     app = express(),
     port = process.env.port || 3000;
 
-app.get('/account',(req,res,next)=>{
-  res.json({
-    "AccountName": "Linh",
-    "Balance": 113.34
-  });
-});
+// app.get('/account',(req,res,next)=>{
+//   res.json({
+//     "AccountName": "Linh",
+//     "Balance": 113.34
+//   });
+// });
 
-app.post('/register',(req,res,next)=>{
-  var requestHeader  = req.headers;
-  var accountName = requestHeader["account"];
-  var isSuperUser = requestHeader["issuperuser"] === true || requestHeader["issuperuser"]==="true";
-  res.send({
-    "result": "ok",
-    "passwordComplexity": "strong"
-  });
-});
+// app.post('/register',(req,res,next)=>{
+//   var requestHeader  = req.headers;
+//   var accountName = requestHeader["account"];
+//   var isSuperUser = requestHeader["issuperuser"] === true || requestHeader["issuperuser"]==="true";
+//   res.send({
+//     "result": "ok",
+//     "passwordComplexity": "strong"
+//   });
+// });
+
+studentRoute(app);
   
 app.listen(port, ()=>{
   console.log(`Server running on port ${port}`);
