@@ -1,0 +1,25 @@
+{
+  "name": "nodepractice",
+  "version": "1.0.0",
+  "description": "coding in nodejs",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linh309/node-practice.git"
+  },
+  "author": "Linh Nguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/linh309/node-practice/issues"
+  },
+  "homepage": "https://github.com/linh309/node-practice#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
