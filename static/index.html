@@ -11,12 +11,95 @@
 <body>
     <div class='container'>
       <div class='row'>
-          <div class="alert alert-success" role="alert">
-              A simple succes it out!
-            </div>
+        <table class="table table-striped" id='spendingTable'>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Category</th>
+              <th scope="col">Amount</th>       
+              <th scope="col">Owner</th>           
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <form id='frmSpending'>
+          <div class='form-group'>
+              <label for="category">Category</label>
+              <input type="text" class="form-control" id="category">
+          </div>
+          <div class='form-group' >
+              <label for="amount">Amount</label>
+              <input type="number" class="form-control" id="amount">
+          </div>
+          <div class='form-group'>
+              <label for="owner">OWner</label>
+              <select class="form-control" id="owner">
+                  <option value="Linh">Linh</option>
+                  <option value="Thanh">Thanh</option>                  
+                </select>
+          </div>
+          <button id="btnSubmit" type="button" class="btn btn-primary">Submit</button>
+        </form>
+
       </div>
     </div>
-
-    
 </body>
+
+<script>
+const rootSpendingApi='/api/spending/';
+const tableId = '#spendingTable';
+const formId = '#frmSpending'
+$(function(){
+  getAllSpending();
+  $("#btnSubmit").click((event)=> {
+    var formData = createFormData(formId);
+    var url=`${rootSpendingApi}`;
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: formData,
+      dataType: "json"
+    })
+    .done(function(data){
+        if (data.id!=''){
+          alert("OK");
+          $("#frmSpending input, select").val('')
+          getAllSpending();
+        }
+    })
+
+    event.preventDefault();
+  })
+})
+
+
+function getAllSpending() {
+  $.get(`${rootSpendingApi}`,(data) => {
+    if (data!==undefined && data!==null){
+      $(tableId).find("tbody").html('');
+      data.forEach((item,index)=>{        
+        $(tableId).find("tbody").append(`<tr><td>${++index}</td><td>${item.data.category}</td><td>${item.data.amount}</td><td>${item.data.owner}</td></tr>`);
+      });
+    }
+  })
+}
+
+function createFormData(formid){
+  var data = {
+    category: "",
+    amount: 0,
+    owner: "",
+  };
+  var inputs = $(formid+" input, select");
+  inputs.each((index,input)=>{
+    var dataField = $(input).attr("id");
+    var dataValue  = $(input).val();
+    data[dataField] = dataValue;
+  });  
+  return data;
+}
+
+</script>
+
 </html>
