@@ -9,39 +9,46 @@
 </head>
 
 <body>
+
+    <audio controls>
+      <source src="http://localhost:3000/stream" type="audio/mpeg">      
+    </audio>
+
     <div class='container'>
       <div class='row'>
-        <table class="table table-striped" id='spendingTable'>
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Category</th>
-              <th scope="col">Amount</th>       
-              <th scope="col">Owner</th>           
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-
-        <form id='frmSpending'>
-          <div class='form-group'>
-              <label for="category">Category</label>
-              <input type="text" class="form-control" id="category">
-          </div>
-          <div class='form-group' >
-              <label for="amount">Amount</label>
-              <input type="number" class="form-control" id="amount">
-          </div>
-          <div class='form-group'>
-              <label for="owner">OWner</label>
-              <select class="form-control" id="owner">
-                  <option value="Linh">Linh</option>
-                  <option value="Thanh">Thanh</option>                  
-                </select>
-          </div>
-          <button id="btnSubmit" type="button" class="btn btn-primary">Submit</button>
-        </form>
-
+        <div class='col-md-3'>
+            <form id='frmSpending'>
+                <div class='form-group'>
+                    <label for="category">Category</label>
+                    <input type="text" class="form-control" id="category">
+                </div>
+                <div class='form-group' >
+                    <label for="amount">Amount</label>
+                    <input type="number" class="form-control" id="amount">
+                </div>
+                <div class='form-group'>
+                    <label for="owner">OWner</label>
+                    <select class="form-control" id="owner">
+                        <option value="Linh">Linh</option>
+                        <option value="Thanh">Thanh</option>                  
+                      </select>
+                </div>
+                <button id="btnSubmit" type="button" class="btn btn-primary">Submit</button>
+              </form>      
+        </div>
+        <div class='col-md-9'>
+            <table class="table table-striped" id='spendingTable'>
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Amount</th>       
+                    <th scope="col">Owner</th>           
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>      
+        </div>
       </div>
     </div>
 </body>

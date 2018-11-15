@@ -8,6 +8,8 @@ var route = (app)=>{
         app.route("/api/spending")
                 .get(spending.getAllSpending)
                 .post(spending.create)
+        app.route('/stream')
+                .get(spending.streamFile)
 };
 
 module.exports = route;
