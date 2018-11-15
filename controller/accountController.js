@@ -1,8 +1,15 @@
+var db = require('../firebaseData/connection');
+
+
 var accountController = {
     getStudent: (req,res,next) => {
-        res.json( {
-            "Name": "Linh",
-            "Course": "NodeJS"
+        const spendingCollection  = db.collection("Spending");
+        spendingCollection.get().then(snapshot=> {
+            var docs = new Array();
+            snapshot.forEach(doc=>{
+              docs.push( doc.data());
+            });
+            res.json(docs);
         });
     },
     createStudent: (req,res,next)=> {
