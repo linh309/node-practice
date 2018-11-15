@@ -9,13 +9,27 @@ var spendingController = {
         const stat = fs.statSync(path);
         const fileSize = stat.size;
         const range = req.headers.range;
+        // const start = parseInt(parts[0], 10)
+        // const end = parts[1] 
+
+        let start = 0;
+        let end = 0;
+
         if (range){
+            const parts1 = range.replace(/bytes=/, "").split("-")
+            start = parseInt(parts1[0], 10);
+            end = parts1[1] ;
+        }
+
+        if (start>0){
 
             const parts = range.replace(/bytes=/, "").split("-")
-            const start = parseInt(parts[0], 10)
-            const end = parts[1] 
-              ? parseInt(parts[1], 10)
-              : fileSize-1
+            // start = parseInt(parts[0], 10)
+            // end = parts[1] 
+            //   ? parseInt(parts[1], 10)
+            //   : fileSize-1
+            start = 1;
+            end = 98341;
             const chunksize = (end-start)+1
             const file = fs.createReadStream(path, {start, end})
             const head = {
