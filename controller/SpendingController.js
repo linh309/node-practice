@@ -1,4 +1,6 @@
 //https://medium.com/@daspinola/video-stream-with-node-js-and-html5-320b3191a6b6
+//https://www.sitepoint.com/basics-node-js-streams/
+
 const db = require('../firebaseData/connection');
 const collection = db.collection("Spending");
 const fs = require('fs');
@@ -51,6 +53,23 @@ var spendingController = {
                 .pipe(res); //piping the output of a readable stream - the source of data, as the input of a writeable stream
                             //in this case writeable stream is res object (Response Object)
         }        
+    },
+
+    downloadFile(req,res,next) {
+        const path='D:/SourceCode/node-practice/asset/song.mp3';
+        const stat = fs.statSync(path);
+        const fileSize = stat.size;        
+        const head = {
+            "Content-Type": "audio/mpeg",
+            "Content-Disposition": 'attachment; filename="song.mp3"',
+            "Content-Length": fileSize
+        };
+        const start = 0;
+        const end = 100000;
+
+        res.writeHead(200, head);
+        fs.createReadStream(path,{start,end})
+            .pipe(res);
     },
 
     getAllSpending: (req,res,next) => {                
